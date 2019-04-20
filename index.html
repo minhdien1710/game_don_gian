@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="game">
+</div>
+<script>
+    function Ball(image, top, left, size){
+        this.image = image;
+        this.top = top;
+        this.left = left;
+        this.size = size;
+
+        this.getBall = function(){
+            return ' <img  width="'+ this.size + '"' +
+                ' height="'+ this.size + '"' +
+                ' src="' + this.image +'"' +
+                ' style="top : '+this.top+'px; left:'+this.left+'px;position:absolute" />';
+        };
+
+        this.moveRight = function(){
+            this.left += 5;
+        };
+        this.moveDown = function () {
+            this.top +=5;
+        };
+    }
+
+    let ball = new Ball('download.png', 20, 30, 200);
+
+    function start(){
+        if(ball.left < window.innerWidth - ball.size){
+            ball.moveRight();
+        }else if(ball.top <window.innerHeight - ball.size){
+            ball.moveDown();
+        }
+        document.getElementById('game').innerHTML = ball.getBall();
+        setTimeout(start, 40);
+    }
+
+
+    start();
+</script>
+</body>
+</html>
